@@ -40,7 +40,7 @@ in
           $src/slides/collections.md \
           $src/slides/conclusion.md \
           > slides.md
-      pandoc -t revealjs --template=$src/template.revealjs --variable=codedir:$out --variable=transition:none --highlight-style=zenburn -s slides.md -o slides.html
+      pandoc -t revealjs --template=$src/template.revealjs --variable=codedir:$out --variable=transition:none --highlight-style=zenburn -s slides.md -o index.html
       rm slides.md
     '';
 
