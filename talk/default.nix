@@ -10,7 +10,7 @@ let
     sha256 = "5be5c1b831e0f4a4f955f76340c2d08c8a1a57c5be5dd68592fd5be511e76bda";
   };
 
-  reflex-materials-code = import ../code {};
+  reflex-materials-code = import ../../../code {};
   local = ./.;
 in
   pkgs.stdenv.mkDerivation {
