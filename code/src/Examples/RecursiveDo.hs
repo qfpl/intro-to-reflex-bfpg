@@ -24,9 +24,9 @@ attachRecursiveDoExamples ::
   MonadJSM m =>
   m ()
 attachRecursiveDoExamples = do
-  attachId "examples-recursiveDo-1"
+  attachId_ "examples-recursiveDo-1"
     counterExample1
-  attachId "examples-recursiveDo-2"
+  attachId_ "examples-recursiveDo-2"
     counterExample2
 
 mkCounter ::

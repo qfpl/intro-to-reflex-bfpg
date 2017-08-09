@@ -30,17 +30,17 @@ attachEventExamples ::
   MonadJSM m =>
   m ()
 attachEventExamples = do
-  attachId "examples-events-frame" $
+  attachId_ "examples-events-frame" $
     wrapDemo id mkRedBlueInput
-  attachId "examples-events-flipper" $
+  attachId_ "examples-events-flipper" $
     wrapDemo flipper mkRedBlueInput
-  attachId "examples-events-blue" $
+  attachId_ "examples-events-blue" $
     wrapDemo blue mkRedBlueInput
-  attachId "examples-events-red" $
+  attachId_ "examples-events-red" $
     wrapDemo red mkRedBlueInput
-  attachId "examples-events-parse" $
+  attachId_ "examples-events-parse" $
     wrapDemo (parse . fmap unParseText) mkParseInput
-  attachId "examples-events-either"
+  attachId_ "examples-events-either"
     demoEither
 
   attachFizzBuzzExamples

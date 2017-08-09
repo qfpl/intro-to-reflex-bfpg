@@ -24,17 +24,17 @@ attachFizzBuzzExamples ::
   MonadJSM m =>
   m ()
 attachFizzBuzzExamples = do
-  attachId "examples-events-fizz-and-buzz" $ demoFizzBuzz $
+  attachId_ "examples-events-fizz-and-buzz" $ demoFizzBuzz $
     fizzAndBuzz
-  attachId "examples-events-leftmost" $ demoFizzBuzz $
+  attachId_ "examples-events-leftmost" $ demoFizzBuzz $
     fizzBuzzLeftmost
-  attachId "examples-events-mergeWith" $ demoFizzBuzz $
+  attachId_ "examples-events-mergeWith" $ demoFizzBuzz $
     fizzBuzzMergeWith
-  attachId "examples-events-merge" $ demoFizzBuzz $
+  attachId_ "examples-events-merge" $ demoFizzBuzz $
     fizzBuzzMerge
-  attachId "examples-events-fizzbuzz" $ demoFizzBuzz $
+  attachId_ "examples-events-fizzbuzz" $ demoFizzBuzz $
     fizzBuzz
-  attachId "examples-events-fizzbuzz-flip" $ demoFizzBuzz $
+  attachId_ "examples-events-fizzbuzz-flip" $ demoFizzBuzz $
     fizzBuzzFlip
 
 layoutPair ::

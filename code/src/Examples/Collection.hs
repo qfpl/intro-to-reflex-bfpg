@@ -31,16 +31,16 @@ attachCollectionExamples ::
   MonadJSM m =>
   m ()
 attachCollectionExamples = do
-  attachId "examples-collection-add"
+  attachId_ "examples-collection-add"
     addExample
 
-  attachId "examples-collection-remove"
+  attachId_ "examples-collection-remove"
     removeExample
 
-  attachId "examples-collection-remove-complete"
+  attachId_ "examples-collection-remove-complete"
     removeCompleteExample
 
-  attachId "examples-collection-edit"
+  attachId_ "examples-collection-edit"
     editExample
 
 getKey :: Reflex t => TextInput t -> Key -> Event t ()

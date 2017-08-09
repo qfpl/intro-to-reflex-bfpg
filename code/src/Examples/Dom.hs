@@ -223,17 +223,17 @@ attachDomExamples ::
   MonadJSM m =>
   m ()
 attachDomExamples = do
-  attachId "examples-dom-todo"
+  attachId_ "examples-dom-todo"
     todoExample
-  attachId "examples-dom-todoitem-1"
+  attachId_ "examples-dom-todoitem-1"
     todoItemExample1
-  attachId "examples-dom-todoitem-2"
+  attachId_ "examples-dom-todoitem-2"
     todoItemExample2
-  attachId "examples-dom-todoitem-3"
+  attachId_ "examples-dom-todoitem-3"
     todoItemExample3
-  attachId "examples-dom-todoitem-4"
+  attachId_ "examples-dom-todoitem-4"
     todoItemExample4
-  attachId "examples-dom-todoitem-5"
+  attachId_ "examples-dom-todoitem-5"
     todoItemExample5
-  attachId "examples-dom-todoitem-6"
+  attachId_ "examples-dom-todoitem-6"
     todoItemExample6

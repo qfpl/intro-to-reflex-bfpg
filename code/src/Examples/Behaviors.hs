@@ -18,15 +18,15 @@ attachBehaviorExamples ::
   MonadJSM m =>
   m ()
 attachBehaviorExamples = do
-  attachId "examples-behaviors-sampleBlue1" $
+  attachId_ "examples-behaviors-sampleBlue1" $
     wrapDemo sampleBlue1 mkRedBlueInput
-  attachId "examples-behaviors-sampleBlue2" $
+  attachId_ "examples-behaviors-sampleBlue2" $
     wrapDemo sampleBlue2 mkRedBlueInput
-  attachId "examples-behaviors-sampleFlipBlue" $
+  attachId_ "examples-behaviors-sampleFlipBlue" $
     wrapDemo sampleFlipBlue mkRedBlueInput
-  attachId "examples-behaviors-sampleAlwaysBlue" $
+  attachId_ "examples-behaviors-sampleAlwaysBlue" $
     wrapDemo (const $ pure . sampleAlwaysBlue) mkRedBlueInput
-  attachId "examples-behaviors-samplePair" $
+  attachId_ "examples-behaviors-samplePair" $
     wrapDemo2 samplePair mkRedBlueInput
 
 sampleBlue1 :: (Reflex t, MonadHold t m)

@@ -21,7 +21,7 @@ attachDynamicExamples ::
   MonadJSM m =>
   m ()
 attachDynamicExamples =
-  attachId "examples-dynamic-counter"
+  attachId_ "examples-dynamic-counter"
     counterExample
 
 counterExample ::

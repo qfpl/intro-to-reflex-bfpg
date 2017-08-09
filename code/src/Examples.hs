@@ -20,7 +20,7 @@ import Examples.Collection (attachCollectionExamples)
 
 examples :: JSM ()
 examples = do
-  attachId "grid-setup" $
+  attachId_ "grid-setup" $
     setupGrid defaultGridConfig
   attachEventExamples
   attachBehaviorExamples

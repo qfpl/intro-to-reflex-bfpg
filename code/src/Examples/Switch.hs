@@ -31,19 +31,19 @@ attachSwitchExamples ::
   MonadJSM m =>
   m ()
 attachSwitchExamples = do
-  attachId "examples-switch-colour-1" $
+  attachId_ "examples-switch-colour-1" $
     switchColourExample switchColour1
-  attachId "examples-switch-colour-2" $
+  attachId_ "examples-switch-colour-2" $
     switchColourExample switchColour2
-  attachId "examples-switch-widget-hide"
+  attachId_ "examples-switch-widget-hide"
     widgetHideExample
-  attachId "examples-switch-widget-hold"
+  attachId_ "examples-switch-widget-hold"
     widgetHoldExample
-  attachId "examples-switch-dyn"
+  attachId_ "examples-switch-dyn"
     dynExample
-  attachId "examples-switch-workflow-1"
+  attachId_ "examples-switch-workflow-1"
     workflowExample1
-  attachId "examples-switch-workflow-2"
+  attachId_ "examples-switch-workflow-2"
     workflowExample2
 
 switchColour1 ::
