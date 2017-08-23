@@ -3,7 +3,7 @@
 
 ##
 
-#reflex-frp on Freenode
+reflex-frp on Freenode
 
 ##
 
