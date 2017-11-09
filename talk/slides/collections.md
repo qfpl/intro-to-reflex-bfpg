@@ -326,7 +326,7 @@ list dMap todoItem
 ##
 
 ```haskell
-  dmText <- foldDyn ($) Map.empty . mergeWith (.) $ [
+  dMap <- foldDyn ($) Map.empty . mergeWith (.) $ [
       Map.insert <$> current dNextKey <@> eAdd
     , flip (foldr Map.delete) <$> eRemoves
     ]
