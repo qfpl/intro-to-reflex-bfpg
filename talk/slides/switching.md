@@ -8,10 +8,10 @@
 ##
 
 ```haskell
-switchPromptly :: (Reflex t, MonadHold t m) 
-               => Event a 
-               -> Event (Event a) 
-               -> m (Event a)
+switchHold :: (Reflex t, MonadHold t m) 
+           => Event t a 
+           -> Event t (Event t a) 
+           -> m (Event t a)
 ```
 
 ##
@@ -208,35 +208,12 @@ switchColour :: (Reflex t, MonadHold t m)
              -> m (Event t Colour, Event t Colour)
 switchColour eSwitch1 eSwitch2 eInput = do
 
-  eOut1 <- switchPromptly _
+  eOut1 <- switchHold _
 
 
 
 
-  eOut2 <- switchPromptly _
-
-
-
-
-  pure (eOut1, eOut2)
-```
-
-##
-
-```haskell
-switchColour :: (Reflex t, MonadHold t m) 
-             => Event t ()
-             -> Event t ()
-             -> Event t Colour
-             -> m (Event t Colour, Event t Colour)
-switchColour eSwitch1 eSwitch2 eInput = do
-
-  eOut1 <- switchPromptly eInput _
-
-
-
-
-  eOut2 <- switchPromptly _
+  eOut2 <- switchHold _
 
 
 
@@ -254,12 +231,12 @@ switchColour :: (Reflex t, MonadHold t m)
              -> m (Event t Colour, Event t Colour)
 switchColour eSwitch1 eSwitch2 eInput = do
 
-  eOut1 <- switchPromptly eInput _
+  eOut1 <- switchHold eInput _
 
 
 
 
-  eOut2 <- switchPromptly never _
+  eOut2 <- switchHold _
 
 
 
@@ -277,12 +254,35 @@ switchColour :: (Reflex t, MonadHold t m)
              -> m (Event t Colour, Event t Colour)
 switchColour eSwitch1 eSwitch2 eInput = do
 
-  eOut1 <- switchPromptly eInput . leftmost $ [
+  eOut1 <- switchHold eInput _
+
+
+
+
+  eOut2 <- switchHold never _
+
+
+
+
+  pure (eOut1, eOut2)
+```
+
+##
+
+```haskell
+switchColour :: (Reflex t, MonadHold t m) 
+             => Event t ()
+             -> Event t ()
+             -> Event t Colour
+             -> m (Event t Colour, Event t Colour)
+switchColour eSwitch1 eSwitch2 eInput = do
+
+  eOut1 <- switchHold eInput . leftmost $ [
 
 
     ]
 
-  eOut2 <- switchPromptly never . leftmost $ [
+  eOut2 <- switchHold never . leftmost $ [
 
 
     ]
@@ -300,12 +300,12 @@ switchColour :: (Reflex t, MonadHold t m)
              -> m (Event t Colour, Event t Colour)
 switchColour eSwitch1 eSwitch2 eInput = do
 
-  eOut1 <- switchPromptly eInput . leftmost $ [
+  eOut1 <- switchHold eInput . leftmost $ [
       eInput <$ eSwitch1
 
     ]
 
-  eOut2 <- switchPromptly never . leftmost $ [
+  eOut2 <- switchHold never . leftmost $ [
 
 
     ]
@@ -323,35 +323,35 @@ switchColour :: (Reflex t, MonadHold t m)
              -> m (Event t Colour, Event t Colour)
 switchColour eSwitch1 eSwitch2 eInput = do
 
-  eOut1 <- switchPromptly eInput . leftmost $ [
-      eInput <$ eSwitch1
-    , never  <$ eSwitch2
-    ]
-
-  eOut2 <- switchPromptly never . leftmost $ [
-
-
-    ]
-
-  pure (eOut1, eOut2)
-```
-
-##
-
-```haskell
-switchColour :: (Reflex t, MonadHold t m) 
-             => Event t ()
-             -> Event t ()
-             -> Event t Colour
-             -> m (Event t Colour, Event t Colour)
-switchColour eSwitch1 eSwitch2 eInput = do
-
-  eOut1 <- switchPromptly eInput . leftmost $ [
+  eOut1 <- switchHold eInput . leftmost $ [
       eInput <$ eSwitch1
     , never  <$ eSwitch2
     ]
 
-  eOut2 <- switchPromptly never . leftmost $ [
+  eOut2 <- switchHold never . leftmost $ [
+
+
+    ]
+
+  pure (eOut1, eOut2)
+```
+
+##
+
+```haskell
+switchColour :: (Reflex t, MonadHold t m) 
+             => Event t ()
+             -> Event t ()
+             -> Event t Colour
+             -> m (Event t Colour, Event t Colour)
+switchColour eSwitch1 eSwitch2 eInput = do
+
+  eOut1 <- switchHold eInput . leftmost $ [
+      eInput <$ eSwitch1
+    , never  <$ eSwitch2
+    ]
+
+  eOut2 <- switchHold never . leftmost $ [
       never  <$ eSwitch1
 
     ]
@@ -369,12 +369,12 @@ switchColour :: (Reflex t, MonadHold t m)
              -> m (Event t Colour, Event t Colour)
 switchColour eSwitch1 eSwitch2 eInput = do
 
-  eOut1 <- switchPromptly eInput . leftmost $ [
+  eOut1 <- switchHold eInput . leftmost $ [
       eInput <$ eSwitch1
     , never  <$ eSwitch2
     ]
 
-  eOut2 <- switchPromptly never . leftmost $ [
+  eOut2 <- switchHold never . leftmost $ [
       never  <$ eSwitch1
     , eInput <$ eSwitch2
     ]
@@ -385,55 +385,55 @@ switchColour eSwitch1 eSwitch2 eInput = do
 ##
 
 ```haskell
-switchPromptly :: (Reflex t, MonadHold t m) 
-               => Event a 
-               -> Event    (Event a) 
-               -> m (Event a)
+switchHold :: (Reflex t, MonadHold t m) 
+           => Event t a 
+           -> Event t    (Event t a) 
+           -> m (Event t a)
 ```
 
 ##
 
 ```haskell
-switch         :: (Reflex t, MonadHold t m) 
-               => Event a 
-               -> Event    (Event a) 
-               -> m (Event a)
+switch     :: (Reflex t, MonadHold t m) 
+           => Event t a 
+           -> Event t    (Event t a) 
+           -> m (Event t a)
 ```
 
 ##
 
 ```haskell
-switch         ::  Reflex t
-               => Event a 
-               -> Event    (Event a) 
-               -> m (Event a)
+switch     ::  Reflex t
+           => Event t a 
+           -> Event t    (Event t a) 
+           -> m (Event t a)
 ```
 
 ##
 
 ```haskell
-switch         ::  Reflex t
-               => Event a 
-               -> Event    (Event a) 
-               ->    Event a
+switch     ::  Reflex t
+           => Event t a 
+           -> Event t    (Event t a) 
+           ->    Event t a
 ```
 
 ##
 
 ```haskell
-switch         ::  Reflex t
-               => 
-                  Event    (Event a) 
-               ->    Event a
+switch     ::  Reflex t
+           => 
+              Event t    (Event t a) 
+           ->    Event t a
 ```
 
 ##
 
 ```haskell
-switch         ::  Reflex t
-               => 
-                  Behavior (Event a)
-               ->    Event a
+switch     ::  Reflex t
+           => 
+              Behavior t (Event t a)
+           ->    Event t a
 ```
 
 ##
@@ -446,12 +446,12 @@ switchColour :: (Reflex t, MonadHold t m)
              -> m (Event t Colour, Event t Colour)
 switchColour eSwitch1 eSwitch2 eInput = do
 
-  eOut1 <- switchPromptly eInput . leftmost $ [
+  eOut1 <- switchHold eInput . leftmost $ [
       eInput <$ eSwitch1
     , never  <$ eSwitch2
     ]
 
-  eOut2 <- switchPromptly never . leftmost $ [
+  eOut2 <- switchHold never . leftmost $ [
       never  <$ eSwitch1
     , eInput <$ eSwitch2
     ]
@@ -474,7 +474,7 @@ switchColour eSwitch1 eSwitch2 eInput = do
     , never  <$ eSwitch2
     ]
 
-  eOut2 <- switchPromptly never . leftmost $ [
+  eOut2 <- switchHold never . leftmost $ [
       never  <$ eSwitch1
     , eInput <$ eSwitch2
     ]
@@ -526,6 +526,21 @@ switchColour eSwitch1 eSwitch2 eInput = do
     ]
 
   pure (switch eOut1, switch eOut2)
+```
+
+##
+
+```haskell
+switch    :: Reflex t
+          => Behavior t (Event t a)
+          -> Event t a
+```
+##
+
+```haskell
+switchDyn :: Reflex t
+          => Dynamic t (Event t a)
+          -> Event t a
 ```
 
 ## 
@@ -1039,7 +1054,7 @@ widgetHold :: (MonadAdjust t m, MonadHold t m)
     ]
 
   let
-    eText = switch . current $ deText
+    eText = switchDyn deText
 
   dText <- holdDyn "" eText
   el "div"$ dynText dText
@@ -1073,7 +1088,7 @@ dyn :: (MonadAdjust t m, PostBuild t m)
     ]
 
   let
-    eText = switch . current $ deText
+    eText = switchDyn deText
 
   dText <- holdDyn "" eText
   el "div"$ dynText dText
@@ -1095,7 +1110,7 @@ dyn :: (MonadAdjust t m, PostBuild t m)
     ]
 
   let
-    eText = switch . current $ deText
+    eText = switchDyn $ deText
 
   dText <- holdDyn "" eText
   el "div"$ dynText dText
@@ -1117,7 +1132,7 @@ dyn :: (MonadAdjust t m, PostBuild t m)
     ]
 
   let
-    eText = switch . current $ deText
+    eText = switchDyn $ deText
 
   dText <- holdDyn "" eText
   el "div"$ dynText dText
@@ -1183,7 +1198,7 @@ dyn :: (MonadAdjust t m, PostBuild t m)
     ]
 
   eeText <- dyn dWidget
-  eText  <- switchPromptly never eeText
+  eText  <- switchHold never eeText
 
   dText <- holdDyn "" eText
   el "div"$ dynText dText
@@ -1225,7 +1240,7 @@ workflow :: (DomBuilder t m, MonadFix m, MonadHold t m)
 
   deText <- _
 
-  let eText = switch . current $ deText
+  let eText = switchDyn deText
 
   dText <- holdDyn "" eText
   el "div"$ dynText dText
@@ -1249,7 +1264,7 @@ workflow :: (DomBuilder t m, MonadFix m, MonadHold t m)
 
   deText <- _
 
-  let eText = switch . current $ deText
+  let eText = switchDyn deText
 
   dText <- holdDyn "" eText
   el "div"$ dynText dText
@@ -1273,7 +1288,7 @@ workflow :: (DomBuilder t m, MonadFix m, MonadHold t m)
 
   deText <- _
 
-  let eText = switch . current $ deText
+  let eText = switchDyn deText
 
   dText <- holdDyn "" eText
   el "div"$ dynText dText
@@ -1297,7 +1312,7 @@ workflow :: (DomBuilder t m, MonadFix m, MonadHold t m)
 
   deText <- workflow workflow1
 
-  let eText = switch . current $ deText
+  let eText = switchDyn deText
 
   dText <- holdDyn "" eText
   el "div"$ dynText dText
